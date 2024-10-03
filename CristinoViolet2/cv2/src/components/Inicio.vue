@@ -1,33 +1,20 @@
 <template>
     <div>
-      <header>
-        <nav>
-          <h1>Tienda Cristino Violet</h1>
-          <ul>
-            <li><router-link to="/">Inicio</router-link></li>
-            <li><router-link to="/cart">Carrito de Compras</router-link></li>
-          </ul>
-        </nav>
-      </header>
-  
-      <main>
-        <h2>Nuestros Productos</h2>
-        <div class="product-list">
-          <div class="product" v-for="product in products" :key="product.id">
-            <img :src="product.image" :alt="product.name" />
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.description }}</p>
-            <p><strong>Precio:</strong> {{ product.price }} CLP</p>
-            <button @click="addToCart(product)">Agregar al Carrito</button>
-          </div>
+      <h2>Nuestros Productos</h2>
+      <div class="product-list">
+        <div class="product" v-for="product in products" :key="product.id">
+          <img :src="product.image" :alt="product.name" />
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <p><strong>Precio:</strong> {{ product.price }} CLP</p>
+          <button @click="addToCart(product)">Agregar al Carrito</button>
         </div>
-      </main>
+      </div>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'Products',
     data() {
       return {
         products: [
@@ -44,6 +31,7 @@
         if (itemInCart) {
           itemInCart.quantity++;
         } else {
+          console.log("Agregando producto a carrito");
           cart.push({ ...product, quantity: 1 });
         }
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -51,8 +39,3 @@
     }
   };
   </script>
-  
-  <style>
-  /* Same styles as before */
-  </style>
-  
